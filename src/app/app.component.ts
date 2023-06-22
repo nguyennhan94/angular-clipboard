@@ -19,18 +19,25 @@ export class AppComponent {
     console.log('pastedText', pastedText);
 
     let row_data = pastedText.split('\n');
-    console.log('row_data', row_data);
+    // row_data.pop();
 
     this.displayedColumns = row_data[0].split('\t');
-    this.displayedColumns.pop();
-    console.log('displayedColumns', this.displayedColumns);
+
+    row_data.shift();
+    // this.displayedColumns.pop();
     // delete row_data[0];
     // Create table dataSource
     let data = [];
 
+    row_data = row_data.filter((r) => r);
+    this.displayedColumns = this.displayedColumns.filter((r) => r);
+    console.log('row_data', row_data);
+    console.log('displayedColumns', this.displayedColumns);
+
     row_data.forEach((row_data) => {
       let row = {};
       this.displayedColumns.forEach((a, index) => {
+        console.log('a', a);
         row[a] = row_data.split('\t')[index];
       });
       data.push(row);
